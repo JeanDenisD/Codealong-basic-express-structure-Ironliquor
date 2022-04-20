@@ -25,11 +25,33 @@
                 </li>
             </ul>
         </nav>
-       </header>
+    </header>
 
-    <h1>Contact us</h1>
-    <img src="./images/liquor1.jpeg" alt="liquor1-img" />
-    <p>Your new online liquor shop</p>
+    <h1>{{title}}</h1>
+    <h2>Price: {{price}} €</h2>
+
+    {{#if imageFile}}
+        <img src="/images/{{imageFile}}" alt="{{title}}-img" />
+    {{else}}
+        <img src="/images/liquor1.jpeg" alt="">
+    {{/if}}
+
+    <div>
+        {{#if stores}}
+            <h5>This product is available in the following stores:</h5>
+            <ul>
+                {{#each stores}}
+                    <li>{{this}} <a href="#">More Details</a></li>
+                {{/each}}
+            </ul>
+        {{else}}
+            <h5>Product not available</h5>
+            <a href="/contact">Please contact us</a></li>
+        {{/if}}
+            
+
+    </div>
+
 </body>
 
 </html>
