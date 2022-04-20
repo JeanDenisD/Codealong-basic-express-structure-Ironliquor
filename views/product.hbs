@@ -1,57 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<h1>{{title}}</h1>
+<h2>Price: {{price}} €</h2>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Iron Liquor</title>
-    <link rel="stylesheet" href="./stylesheets/style.css" />
-</head>
+{{#if imageFile}}
+    <img src="/images/{{imageFile}}" alt="{{title}}-img" />
+{{else}}
+    <img src="/images/liquor1.jpeg" alt="">
+{{/if}}
 
-<body>
-
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="/">Home</a>
-                </li>
-                <li>
-                    <a href="/about">About</a>
-                </li>
-                <li>
-                    <a href="/contact">Contact</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <h1>{{title}}</h1>
-    <h2>Price: {{price}} €</h2>
-
-    {{#if imageFile}}
-        <img src="/images/{{imageFile}}" alt="{{title}}-img" />
+<div>
+    {{#if stores}}
+        <h5>This product is available in the following stores:</h5>
+        <ul>
+            {{#each stores}}
+                <li>{{this}} <a href="#">More Details</a></li>
+            {{/each}}
+        </ul>
     {{else}}
-        <img src="/images/liquor1.jpeg" alt="">
+        <h5>Product not available</h5>
+        <a href="/contact">Please contact us</a></li>
     {{/if}}
+        
 
-    <div>
-        {{#if stores}}
-            <h5>This product is available in the following stores:</h5>
-            <ul>
-                {{#each stores}}
-                    <li>{{this}} <a href="#">More Details</a></li>
-                {{/each}}
-            </ul>
-        {{else}}
-            <h5>Product not available</h5>
-            <a href="/contact">Please contact us</a></li>
-        {{/if}}
-            
-
-    </div>
-
-</body>
-
-</html>
+</div>

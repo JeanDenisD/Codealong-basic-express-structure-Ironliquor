@@ -9,19 +9,22 @@ app.use(express.static('public'));
 // app.get(path,code);
 
 app.get("/",(req, res, next)=>{
-    res.sendFile(__dirname + "/views/home.html");
+    // res.sendFile(__dirname + "/views/home.html");
+    res.render("home")
 })
 
 app.get("/about", (req, res, next)=>{
     // console.log(req.url);
     // console.log(req.method);
-    res.sendFile(__dirname + "/views/about.html");
+    // res.sendFile(__dirname + "/views/about.html");
+    res.render("about")
 });
 
 
 app.get("/contact", (req, res, next)=> {
     console.log("a request on the CONTACT page was received...");
-    res.sendFile(__dirname + "/views/contact.html");
+    // res.sendFile(__dirname + "/views/contact.html");
+    res.render("contact");
 });
 
 app.get("/limoncello", (req, res, next) => {
@@ -39,7 +42,7 @@ app.get("/limoncello", (req, res, next) => {
 app.get("/single-malt", (req, res, next)=> {
     const data = {
         title: "Single Malt",
-        price: 75,
+        price: 120,
         imageFile:"single-malt1.jpeg",
         stores: [],
     }
