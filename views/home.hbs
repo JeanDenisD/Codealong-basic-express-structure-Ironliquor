@@ -1,3 +1,26 @@
 <h1>About us</h1>
+
+<div id="search-form" class="form-container">
+    <p>Search products:</p>
+
+    <form action="/products" method="GET" >
+        <label>
+            Maximum price:
+            <input type="number" min ="1" name="maxPrice">
+        </label>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div id="create-form" class="form-container">
+    <form action="/new" method="POST">
+        <label>Product title: <input type="text" name="title"></label>
+        <label>Product price: <input type="number" min="1" name="price"></label>
+        <button type="submit">Submit</button>
+    </form>
+
+</div>
+
 <img src="./images/liquor1.jpeg" alt="liquor1-img" />
 <p>Your new online liquor shop</p>
+
