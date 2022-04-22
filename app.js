@@ -1,10 +1,19 @@
 const express = require('express');
 const app = express();
 
+const mongoose = require('mongoose');
+const Product = require('./models/Product.model');
+
 app.set("views", __dirname + "/views");
 app.set("view engine", "hbs");
 
 app.use(express.static('public'));
+
+//connection to the DB
+mongoose
+    .connect('mongodb://localhost/ironliquor-ecommerce')
+    .then(x => console.log(`Connected to Mongo! Databse name: "${x.connections[0].name}"`))
+    .catch(err => console.error('Error connecting to mongo',err));
 
 // app.get(path,code);
 
@@ -27,38 +36,41 @@ app.get("/contact", (req, res, next)=> {
     res.render("contact");
 });
 
+
 app.get("/limoncello", (req, res, next) => {
-
-    const data = {
-        title: "Limoncello",
-        price: 20,
-        imageFile: "limoncello1.jpeg",
-        stores: ["Online","Paris", "Albacete","London"],
-    }
-
-    res.render("product", data);
+    
+    Product.findOne({title:"Limoncello"})
+        .then(productDetails=>{
+            res.render("product", productDetails);
+        })
+        .catch(err => console.error('Error getting product from DB',err));
 });
 
 app.get("/single-malt", (req, res, next)=> {
-    const data = {
-        title: "Single Malt",
-        price: 120,
-        imageFile:"single-malt1.jpeg",
-        stores: [],
-    }
 
-    res.render("product",data)
+    Product.findOne({title:"Whisky"})
+        .then(productDetails=>{
+            res.render("product", productDetails);
+        })
+        .catch(err => console.error('Error getting product from DB',err));
 });
 
 app.get("/tequila", (req, res, next)=> {
-    const data = {
-        title: "Tequila",
-        price: 25,
-        imageFile:"tequila1.jpeg",
-        stores: ["Online","London"]
-    }
 
-    res.render("product",data)
+    Product.findOne({title:"Tequila"})
+    .then(productDetails=>{
+        res.render("product", productDetails);
+    })
+    .catch(err => console.error('Error getting product from DB',err));
+});
+
+app.get("/champagne", (req, res, next)=> {
+
+    Product.findOne({title:"Champagne"})
+    .then(productDetails=>{
+        res.render("product", productDetails);
+    })
+    .catch(err => console.error('Error getting product from DB',err));
 });
 
 
