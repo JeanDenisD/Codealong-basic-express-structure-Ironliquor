@@ -4,10 +4,14 @@ const app = express();
 const mongoose = require('mongoose');
 const Product = require('./models/Product.model');
 
+const bodyParser = require('body-parser');
+
+
 app.set("views", __dirname + "/views");
 app.set("view engine", "hbs");
 
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended:true}));
 
 //connection to the DB
 mongoose
@@ -61,6 +65,27 @@ app.get("/products/:productId", (req, res, next) => {
         })
         .catch(err => console.error('Error getting product from DB',err));
 });
+
+// app.post(path,code)
+
+app.post("/new",(req, res, next)=>{
+
+    const newProduct = {
+        title: req.body.title,
+        price: req.body.price
+    };
+
+    Product.create(newProduct)
+    .then(newProduct => {
+        console.log("New product created");
+        console.log(newProduct);
+        res.redirect("/products"); //redirecct to the products page
+    })
+    .catch(error => {
+        console.log("error creating a new product",error)
+        res.redirect("/")
+    })
+})
 
 app.listen(3001, ()=>{
     console.log("server listing to request...");
