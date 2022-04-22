@@ -36,43 +36,14 @@ app.get("/contact", (req, res, next)=> {
     res.render("contact");
 });
 
+app.get("/products/:productId", (req, res, next) => {
 
-app.get("/limoncello", (req, res, next) => {
-    
-    Product.findOne({title:"Limoncello"})
+    Product.findById(req.params.productId)
         .then(productDetails=>{
             res.render("product", productDetails);
         })
         .catch(err => console.error('Error getting product from DB',err));
 });
-
-app.get("/single-malt", (req, res, next)=> {
-
-    Product.findOne({title:"Whisky"})
-        .then(productDetails=>{
-            res.render("product", productDetails);
-        })
-        .catch(err => console.error('Error getting product from DB',err));
-});
-
-app.get("/tequila", (req, res, next)=> {
-
-    Product.findOne({title:"Tequila"})
-    .then(productDetails=>{
-        res.render("product", productDetails);
-    })
-    .catch(err => console.error('Error getting product from DB',err));
-});
-
-app.get("/champagne", (req, res, next)=> {
-
-    Product.findOne({title:"Champagne"})
-    .then(productDetails=>{
-        res.render("product", productDetails);
-    })
-    .catch(err => console.error('Error getting product from DB',err));
-});
-
 
 app.listen(3001, ()=>{
     console.log("server listing to request...");
