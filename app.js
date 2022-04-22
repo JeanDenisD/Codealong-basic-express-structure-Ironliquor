@@ -37,7 +37,16 @@ app.get("/contact", (req, res, next)=> {
 
 app.get("/products", (req, res, next) => {
 
-    Product.find()
+    let filter;
+    const max = req.query.maxPrice;
+    
+    if(max === undefined){
+        filter = {};
+    } else {
+        filter = {price: {$lte: max} };
+    }
+
+    Product.find(filter)
         .then( productsArr => {
             res.render("productList", {products: productsArr} );
         })
