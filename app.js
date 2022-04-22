@@ -29,12 +29,20 @@ app.get("/about", (req, res, next)=>{
     res.render("about")
 });
 
-
 app.get("/contact", (req, res, next)=> {
     console.log("a request on the CONTACT page was received...");
     // res.sendFile(__dirname + "/views/contact.html");
     res.render("contact");
 });
+
+app.get("/products", (req, res, next) => {
+
+    Product.find()
+        .then( productsArr => {
+            res.render("productList", {products: productsArr} );
+        })
+        .catch( error => console.log("error getting products from DB", error) );
+})
 
 app.get("/products/:productId", (req, res, next) => {
 
